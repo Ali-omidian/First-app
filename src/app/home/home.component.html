@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="form-group">
+    <label for="comment">Comment:</label>
+    <textarea #commentText class="form-control" rows="5" name="comment"></textarea>
+    <button (click)="addComment()" class="btn btn-primary" style="margin-top: 1em">Add Comment</button>
+  </div>
+</div>
+<div *ngIf="comments != null" class="container" style="margin-top: 2em">
+  <div *ngFor="let c of comments">
+    <p style="clear: both">{{c.comment}}</p>
+    <div style="float: left">
+      <app-star [rating]="c.numberOfReviews !=0 ? c.star/c.numberOfReviews :0"></app-star>
+    </div>
+    <div style="float: right">
+      <span>{{c.like}}</span>
+      <li (click)="liked(c)" class="glyphicon glyphicon-heart" style="cursor: pointer;"></li>
+      <span>{{c.dislike}}</span>
+      <li (click)="disliked(c)" class="glyphicon glyphicon-heart-empty" style="cursor: pointer;"></li>
+    </div>
+    <div style="clear: both">
+      <span>Rating:</span>
+      <input #ratingInput (keyup.enter)="reviewcount(c,ratingInput)" type="number" min="0" max="5" style="background: #333;color: white; width:30px;">
+    </div>
+    <hr/>
+    <br/>
+  </div>
+</div>
